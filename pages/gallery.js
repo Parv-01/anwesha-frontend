@@ -18,17 +18,11 @@ export default function GalleryPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ✅ Convert manifest into objects expected by VintageTV
-  const tvImages = galleryImagesManifest.map((url, i) => ({
-    name: `Image ${i + 1}`,
+  // ✅ send manifest into TV input format
+  const driveLikeImages = galleryImagesManifest.map((url, idx) => ({
+    name: `Image ${idx + 1}`,
     url,
   }));
-
-  // ✅ Put your youtube links here
-  const youtubeLinks = [
-    "https://www.youtube.com/watch?v=S-ukmg7hPnk",
-    "https://www.youtube.com/watch?v=FSBZHSo1zVw",
-  ];
 
   return (
     <>
@@ -37,9 +31,12 @@ export default function GalleryPage() {
       </Head>
 
       <div className={styles.container}>
+        {/* ✅ Psychedelic animated BG */}
         <div className={styles.psyBackground}>
-           <div className={styles.psyAurora}></div>
+          <div className={styles.psyGradient}></div>
+          <div className={styles.psyParticles}></div>
         </div>
+
         {/* Fullscreen Text with Fading Effect */}
         <div
           className={`${styles.fullscreenText} ${fadeOut ? styles.fadeOut : ""}`}
@@ -52,12 +49,15 @@ export default function GalleryPage() {
           </div>
         </div>
 
-        {/* ✅ TV Section */}
+        {/* ✅ TV ONLY */}
         <div className={styles.tvWrapper}>
-          {/* ✅ Debug line (open console) */}
-          {console.log("✅ Images passed to TV:", tvImages.length, tvImages[0])}
-
-          <VintageTV images={tvImages} youtubeLinks={youtubeLinks} />
+          <VintageTV
+            images={driveLikeImages}
+            youtubeLinks={[
+              "https://www.youtube.com/watch?v=S-ukmg7hPnk",
+              "https://www.youtube.com/watch?v=FSBZHSo1zVw",
+            ]}
+          />
         </div>
       </div>
     </>

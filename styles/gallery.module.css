@@ -195,74 +195,74 @@
   z-index: 2;
 }
 
-/* ✅ Psychedelic Animated Background */
+/* ✅ Psychedelic animated background (behind TV) */
 .psyBackground {
   position: absolute;
   inset: 0;
-  overflow: hidden;
   z-index: 0;
+  overflow: hidden;
   pointer-events: none;
 }
 
-/* Big moving glow blobs */
-.psyBackground::before,
-.psyBackground::after {
-  content: "";
+/* Smooth animated gradient layer */
+.psyGradient {
   position: absolute;
-  width: 900px;
-  height: 900px;
-  border-radius: 50%;
-  filter: blur(140px);
-  opacity: 0.35;
-  animation: psyMove 12s ease-in-out infinite alternate;
-}
-
-/* Left blob */
-.psyBackground::before {
-  top: -200px;
-  left: -200px;
-  background: radial-gradient(circle, rgba(255, 0, 200, 0.55), transparent 70%);
-}
-
-/* Right blob */
-.psyBackground::after {
-  bottom: -200px;
-  right: -200px;
-  background: radial-gradient(circle, rgba(0, 255, 200, 0.55), transparent 70%);
-}
-
-/* Slow animated aurora overlay */
-.psyAurora {
-  position: absolute;
-  inset: -30%;
-  background: conic-gradient(
-    from 180deg,
-    rgba(160, 0, 255, 0.18),
-    rgba(0, 255, 220, 0.16),
-    rgba(255, 255, 0, 0.12),
-    rgba(255, 0, 120, 0.16),
-    rgba(160, 0, 255, 0.18)
-  );
-  filter: blur(90px);
-  opacity: 0.7;
-  animation: auroraSpin 20s linear infinite;
+  inset: -20%;
+  background: radial-gradient(circle at 20% 20%, rgba(255, 0, 210, 0.28), transparent 55%),
+    radial-gradient(circle at 80% 35%, rgba(0, 255, 220, 0.22), transparent 55%),
+    radial-gradient(circle at 45% 85%, rgba(140, 80, 255, 0.22), transparent 60%),
+    radial-gradient(circle at 65% 55%, rgba(255, 180, 60, 0.16), transparent 55%);
+  filter: blur(50px);
+  opacity: 0.95;
+  animation: psyMove 10s ease-in-out infinite alternate;
 }
 
 @keyframes psyMove {
   0% {
-    transform: translate(0, 0) scale(1);
+    transform: translate3d(-4%, -2%, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(3%, 2%, 0) scale(1.12);
   }
   100% {
-    transform: translate(220px, 120px) scale(1.2);
+    transform: translate3d(-2%, 3%, 0) scale(1.08);
   }
 }
 
-@keyframes auroraSpin {
-  0% {
-    transform: rotate(0deg);
+/* Floating particles overlay */
+.psyParticles {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.14) 1px, transparent 2px),
+    radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 2px);
+  background-size: 120px 120px, 180px 180px;
+  background-position: 0 0, 50px 70px;
+  opacity: 0.15;
+  animation: particlesDrift 14s linear infinite;
+}
+
+@keyframes particlesDrift {
+  from {
+    transform: translateY(0px);
   }
-  100% {
-    transform: rotate(360deg);
+  to {
+    transform: translateY(-160px);
   }
 }
+
+/* ✅ TV wrapper (make sure TV is centered + on top of background) */
+.tvWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 120vh;
+  padding-bottom: 90px;
+
+  position: relative;
+  z-index: 2;
+}
+
 

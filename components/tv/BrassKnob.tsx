@@ -1,7 +1,5 @@
 "use client";
 
-import React from "react";
-
 export function BrassKnob({
   rotation,
   onClick,
@@ -13,9 +11,14 @@ export function BrassKnob({
 }) {
   return (
     <button
-      onClick={onClick}
       type="button"
+      onClick={onClick}
+      aria-label="Knob"
       style={{
+        width: 86,
+        height: 86,
+        borderRadius: "999px",
+        overflow: "hidden", // ✅ crops anything outside circle
         border: "none",
         background: "transparent",
         padding: 0,
@@ -28,13 +31,16 @@ export function BrassKnob({
         alt="Knob"
         draggable={false}
         style={{
-          width: "86px",
-          height: "86px",
-          transform: `rotate(${rotation}deg)`,
-          transition: "transform 160ms ease-out",
+          width: "100%",
+          height: "100%",
+          transform: `rotate(${rotation}deg) scale(1.18)`, // ✅ zoom in crops bottom arrows
+          transformOrigin: "center",
+          transition: "transform 320ms ease-in-out", // ✅ like your snippet
+          pointerEvents: "none",
+          userSelect: "none",
           filter: active
-            ? "drop-shadow(0 0 14px rgba(255, 210, 90, 0.45))"
-            : "drop-shadow(0 0 8px rgba(0,0,0,0.35))",
+            ? "drop-shadow(0 0 18px rgba(255, 215, 120, 0.75))"
+            : "drop-shadow(0 0 12px rgba(0,0,0,0.5))",
         }}
       />
     </button>
